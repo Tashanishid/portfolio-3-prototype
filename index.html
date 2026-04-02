@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Desktop Portfolio</title>
+    <!-- Fonts: Inter for UI, Caveat for handwritten annotations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Light cream color */
+            background-color: #fdfbf7;
+            /* Subtle notebook grid: evenly spaced horizontal and vertical lines in soft blue-grey, 28px apart */
+            background-image: 
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 28px 28px;
+            
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+            color: #334155;
+        }
+
+        /* Non-clickable elements */
+        .bottom-left-text {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .top-right-text {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        /* Desktop Items */
+        .desktop-item {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+            cursor: pointer;
+        }
+
+        .icon-box {
+            /* 64x64px flat square box */
+            width: 64px;
+            height: 64px;
+            background-color: #f1f5f9;
+            border: 2px solid #94a3b8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            transition: all 0.2s ease;
+        }
+
+        /* Hover effect for a bit of interaction */
+        .desktop-item:hover .icon-box {
+            transform: translateY(-2px);
+            background-color: #ffffff;
+            box-shadow: 2px 2px 0px #cbd5e1;
+            border-color: #64748b;
+        }
+
+        .icon-label {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            text-shadow: 1px 1px 0 #fdfbf7, -1px -1px 0 #fdfbf7, 1px -1px 0 #fdfbf7, -1px 1px 0 #fdfbf7;
+        }
+
+        /* Annotations (Wireframe specific) */
+        .annotation {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            color: #dc2626; /* red pen color */
+            font-size: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            /* semi-transparent background to ensure readability over grid */
+            background: rgba(253, 251, 247, 0.85); 
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 
+           Positions: Loose, scattered placement, not in a grid.
+           (Upper left, Upper right, Lower center, Lower right)
+        */
+
+        /* Upper left area: Projects */
+        #item-projects {
+            top: 15%;
+            left: 12%;
+        }
+        #anno-projects {
+            top: calc(15% + 15px);
+            left: calc(12% + 100px);
+            transform: rotate(-2deg);
+        }
+
+        /* Upper right area: About Me */
+        #item-about {
+            top: 22%;
+            right: 18%;
+        }
+        #anno-about {
+            top: calc(22% + 15px);
+            right: calc(18% + 100px);
+            transform: rotate(1deg);
+        }
+
+        /* Lower center area: Say Hello (Rotated 3 degrees for personality) */
+        #item-contact {
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%) rotate(3deg);
+        }
+        #anno-contact {
+            top: calc(65% + 15px);
+            left: calc(50% + 60px);
+            transform: rotate(-3deg);
+        }
+
+        /* Lower right area: Resume */
+        #item-resume {
+            top: 75%;
+            right: 15%;
+        }
+        #anno-resume {
+            top: calc(75% + 15px);
+            right: calc(15% + 100px);
+            transform: rotate(2deg);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Non-clickable elements -->
+    <div class="bottom-left-text">[NAME] — Portfolio</div>
+    <div class="top-right-text">[ dark / light ]</div>
+
+    <!-- Desktop Icons & Annotations -->
+    
+    <!-- 1. Projects -->
+    <div class="desktop-item" id="item-projects" ondblclick="window.location.href='projects.html'">
+        <div class="icon-box">📁</div>
+        <div class="icon-label">Projects</div>
+    </div>
+    <div class="annotation" id="anno-projects">← double-click → Projects Folder</div>
+
+    <!-- 2. About Me.txt -->
+    <div class="desktop-item" id="item-about" ondblclick="window.location.href='about.html'">
+        <div class="icon-box">📄</div>
+        <div class="icon-label">About Me.txt</div>
+    </div>
+    <div class="annotation" id="anno-about">double-click → About Me Window →</div>
+
+    <!-- 3. Say Hello -->
+    <div class="desktop-item" id="item-contact" onclick="window.location.href='contact.html'">
+        <div class="icon-box">📌</div>
+        <div class="icon-label">Say Hello</div>
+    </div>
+    <div class="annotation" id="anno-contact">← click → Contact Card Modal</div>
+
+    <!-- 4. Resume.pdf -->
+    <div class="desktop-item" id="item-resume" onclick="alert('Downloading Resume.pdf...')">
+        <div class="icon-box">🗒</div>
+        <div class="icon-label">Resume.pdf</div>
+    </div>
+    <div class="annotation" id="anno-resume">click → downloads PDF →</div>
+
+</body>
+</html>

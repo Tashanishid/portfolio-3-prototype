@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - About Me.txt</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Notebook grid background */
+            background-color: #fdfbf7;
+            background-image: 
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 28px 28px;
+            
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Inter', sans-serif;
+            color: #334155;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Floating Window */
+        .window {
+            width: 520px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Top Bar */
+        .window-topbar {
+            height: 36px;
+            background-color: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            position: relative;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+            position: absolute;
+            left: 16px;
+        }
+
+        .control-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .circle-red { background-color: #ff5f56; }
+        .circle-yellow { background-color: #ffbd2e; }
+        .circle-green { background-color: #27c93f; }
+
+        .window-title {
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        /* Window Body */
+        .window-body {
+            padding: 24px 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Section: Photo & Intro */
+        .intro-section {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .photo-placeholder {
+            width: 100px;
+            height: 100px;
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .intro-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .intro-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+            color: #1e293b;
+        }
+
+        .bio-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .line {
+            height: 2px;
+            border-bottom: 2px dashed #cbd5e1;
+            margin-bottom: 8px;
+        }
+        .line:nth-child(1) { width: 100%; }
+        .line:nth-child(2) { width: 85%; }
+        .line:nth-child(3) { width: 60%; }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin-bottom: 20px;
+        }
+
+        /* Facts rows */
+        .facts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 28px;
+            font-size: 15px;
+        }
+
+        .fact-row {
+            display: flex;
+        }
+
+        .fact-label {
+            width: 90px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .fact-value {
+            color: #334155;
+        }
+
+        /* Link Button */
+        .link-button {
+            align-self: flex-start;
+            font-size: 15px;
+            font-weight: 500;
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .link-button:hover {
+            text-decoration: underline;
+        }
+
+        /* Annotations (Handwritten) */
+        .annotation {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            color: #dc2626; /* red pen color */
+            font-size: 19px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Annotation placements */
+        #anno-close {
+            /* Positioning relative to the window, placed outside the window pointing towards the red circle */
+            top: -24px;
+            left: -130px;
+            transform: rotate(-3deg);
+        }
+
+        #anno-link {
+            /* Placed next to the link button */
+            bottom: 24px;
+            left: 210px;
+            transform: rotate(2deg);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Main Window Container -->
+    <div class="window">
+        <!-- Annotation for close button (needs to be carefully positioned) -->
+        <div class="annotation" id="anno-close">✕ closes window → Desktop</div>
+        
+        <div class="window-topbar">
+            <div class="window-controls">
+                <div class="control-circle circle-red" onclick="window.location.href='index.html'" style="cursor: pointer;"></div>
+                <div class="control-circle circle-yellow"></div>
+                <div class="control-circle circle-green"></div>
+            </div>
+            <div class="window-title">About Me.txt</div>
+        </div>
+
+        <div class="window-body">
+            <div class="intro-section">
+                <div class="photo-placeholder">[PHOTO]</div>
+                <div class="intro-text">
+                    <h1 class="intro-title">Hi, I'm [Name].</h1>
+                    <div class="bio-lines">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="facts-list">
+                <div class="fact-row">
+                    <div class="fact-label">Currently:</div>
+                    <div class="fact-value">[Major] at [University]</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-label">Based in:</div>
+                    <div class="fact-value">[City]. Open to cool opportunities.</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-label">Into:</div>
+                    <div class="fact-value">data, design, and side projects</div>
+                </div>
+            </div>
+
+            <div class="link-button" id="link-projects" onclick="window.location.href='projects.html'">→ See My Projects</div>
+            <div class="annotation" id="anno-link">→ Projects Folder</div>
+        </div>
+    </div>
+
+</body>
+</html>

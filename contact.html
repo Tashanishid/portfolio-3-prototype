@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Contact Card</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Full notebook grid paper desktop */
+            background-color: #fdfbf7;
+            background-image: 
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 28px 28px;
+            
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+            color: #334155;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Faint Desktop Icons (Background) */
+        .desktop-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .desktop-item {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+            opacity: 0.8; /* Faintly visible */
+        }
+
+        .icon-box {
+            width: 64px;
+            height: 64px;
+            background-color: #f1f5f9;
+            border: 2px solid #94a3b8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+        }
+
+        .icon-label {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        #item-projects { top: 15%; left: 12%; }
+        #item-about { top: 22%; right: 18%; }
+        #item-contact { top: 65%; left: 50%; transform: translateX(-50%) rotate(3deg); }
+        #item-resume { top: 75%; right: 15%; }
+
+        /* Dim overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(15, 23, 42, 0.4); /* Dark overlay */
+            z-index: 5;
+        }
+
+        /* Sticky Note Modal */
+        .sticky-note {
+            width: 320px;
+            background-color: #fef08a; /* Bright yellow fill */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0,0,0,0.05); /* Slight shadow */
+            transform: rotate(2deg); /* Rotated 2 degrees clockwise */
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Top pushpin */
+        .pushpin {
+            font-size: 24px;
+            margin-bottom: 8px;
+            margin-top: -12px;
+        }
+
+        .name-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 4px 0;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            font-weight: 500;
+            color: #475569;
+            margin: 0 0 16px 0;
+            text-align: center;
+        }
+
+        .bio-para {
+            font-size: 14px;
+            color: #334155;
+            text-align: center;
+            line-height: 1.4;
+            margin: 0 0 16px 0;
+        }
+
+        /* Divider */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: #eab308; /* Slightly darker yellow */
+            margin-bottom: 16px;
+        }
+
+        /* Link rows */
+        .links-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .link-row {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #1e293b;
+            text-decoration: none;
+            gap: 12px;
+        }
+        
+        .link-row:hover {
+            color: #0f172a;
+            text-decoration: underline;
+        }
+
+        .link-icon {
+            font-size: 16px;
+        }
+
+        /* Bottom button */
+        .btn-close {
+            background-color: transparent;
+            border: 2px solid #ca8a04;
+            color: #b45309;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-close:hover {
+            background-color: rgba(202, 138, 4, 0.1);
+        }
+
+        /* Annotations (Handwritten style) */
+        .annotation {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            color: #dc2626; /* red pen */
+            font-size: 18px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        #anno-close {
+            bottom: -25px;
+            left: 50px;
+            transform: rotate(-3deg);
+        }
+
+        #anno-email {
+            top: 170px;
+            right: -140px;
+            transform: rotate(2deg);
+        }
+
+        #anno-linkedin {
+            top: 205px;
+            right: -130px;
+            transform: rotate(-1deg);
+        }
+
+        #anno-github {
+            top: 240px;
+            right: -130px;
+            transform: rotate(1deg);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Desktop Icons Background -->
+    <div class="desktop-bg">
+        <div class="desktop-item" id="item-projects">
+            <div class="icon-box">📁</div>
+            <div class="icon-label">Projects</div>
+        </div>
+        <div class="desktop-item" id="item-about">
+            <div class="icon-box">📄</div>
+            <div class="icon-label">About Me.txt</div>
+        </div>
+        <div class="desktop-item" id="item-contact">
+            <div class="icon-box">📌</div>
+            <div class="icon-label">Say Hello</div>
+        </div>
+        <div class="desktop-item" id="item-resume">
+            <div class="icon-box">🗒</div>
+            <div class="icon-label">Resume.pdf</div>
+        </div>
+    </div>
+
+    <!-- Semi-transparent overlay -->
+    <div class="overlay"></div>
+
+    <!-- Sticky Note Modal -->
+    <div class="sticky-note">
+        
+        <!-- Annotations mapping outside the sticky note -->
+        <div class="annotation" id="anno-close">← dismisses modal, returns to Desktop</div>
+        <div class="annotation" id="anno-email">← mailto link</div>
+        <div class="annotation" id="anno-linkedin">← External link</div>
+        <div class="annotation" id="anno-github">← External link</div>
+
+        <div class="pushpin">📌</div>
+        <p class="name-text">[NAME]</p>
+        <p class="subtitle">Let's talk.</p>
+        <p class="bio-para">Looking for internships, collabs, and interesting problems.</p>
+        
+        <div class="divider"></div>
+
+        <div class="links-container">
+            <a href="#" class="link-row">
+                <span class="link-icon">✉</span> email@email.com
+            </a>
+            <a href="#" class="link-row">
+                <span class="link-icon">🔗</span> linkedin.com/in/yourname
+            </a>
+            <a href="#" class="link-row">
+                <span class="link-icon">🐙</span> github.com/yourname
+            </a>
+        </div>
+
+        <a href="index.html" class="btn-close">[ ✕ close ]</a>
+
+    </div>
+
+</body>
+</html>
